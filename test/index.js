@@ -3,6 +3,7 @@ import {
 	isEmpty,
 	isEmptyOrNil,
 	isNil,
+	isObjectEmpty,
 } from '../src';
 
 describe('getProp', () => {
@@ -113,5 +114,30 @@ describe('isNil', () => {
 	it('should return true when argument is undefined', () => {
 		const result = isNil(undefined);
 		expect(result).to.be.true;
+	});
+});
+
+describe('isObjectEmpty', () => {
+	it('should return true when argument is an empty object', () => {
+		const result = isObjectEmpty({});
+		expect(result).to.be.true;
+	});
+	it('should return false when argument is not an object', () => {
+		const result1 = isObjectEmpty('string');
+		const result2 = isObjectEmpty(123);
+		const result3 = isObjectEmpty(false);
+		const result4 = isObjectEmpty(null);
+		const result5 = isObjectEmpty(undefined);
+		const result6 = isObjectEmpty(true);
+		expect(result1).to.be.false;
+		expect(result2).to.be.false;
+		expect(result3).to.be.false;
+		expect(result4).to.be.false;
+		expect(result5).to.be.false;
+		expect(result6).to.be.false;
+	});
+	it('should return false when argument is NOT an empty object', () => {
+		const result = isObjectEmpty({ a: 'hello' });
+		expect(result).to.be.false;
 	});
 });

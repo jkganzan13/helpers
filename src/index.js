@@ -33,10 +33,19 @@ function isEmpty(value) {
 		case 'boolean':
 			return false;
 		case 'object':
-			return Object.keys(value).length === 0;
+			return isObjectEmpty(value);
 		default:
 			return !value;
 	}
+}
+
+/**
+ * Returns true if object is empty
+ * @param {object} obj
+ * @return {boolean}
+ **/
+function isObjectEmpty(obj) {
+	return typeof obj === 'object' && !!obj && Object.keys(obj).length === 0;
 }
 
 /**
@@ -53,4 +62,5 @@ export {
 	isEmpty,
 	isEmptyOrNil,
 	isNil,
+	isObjectEmpty,
 };
