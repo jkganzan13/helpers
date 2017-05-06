@@ -1,6 +1,8 @@
 import {
 	getProp,
+	isEmpty,
 	isEmptyOrNil,
+	isNil,
 } from '../src';
 
 describe('getProp', () => {
@@ -30,6 +32,35 @@ describe('getProp', () => {
 		const result2 = getProp(prop2, obj);
 		expect(result).to.equal(undefined);
 		expect(result2).to.equal(undefined);
+	});
+});
+
+describe('isEmpty', () => {
+	it('should return true when argument is an empty string', () => {
+		it('should return true when argument is an empty string', () => {
+			const result = isEmpty('');
+			expect(result).to.be.true;
+		});
+		it('should return true when argument is NaN', () => {
+			const result = isEmpty(NaN);
+			expect(result).to.be.true;
+		});
+		it('should return false when argument is a string', () => {
+			const result = isEmpty('hello world');
+			expect(result).to.be.false;
+		});
+		it('should return false when argument is a number', () => {
+			const result = isEmpty(1);
+			expect(result).to.be.false;
+		});
+		it('should return false when argument is true (boolean)', () => {
+			const result = isEmpty(true);
+			expect(result).to.be.false;
+		});
+		it('should return false when argument is false (boolean)', () => {
+			const result = isEmpty(false);
+			expect(result).to.be.false;
+		});
 	});
 });
 
@@ -65,5 +96,16 @@ describe('isEmptyOrNil', () => {
 	it('should return false when argument is false (boolean)', () => {
 		const result = isEmptyOrNil(false);
 		expect(result).to.be.false;
+	});
+});
+
+describe('isNil', () => {
+	it('should return true when argument is null', () => {
+		const result = isNil(null);
+		expect(result).to.be.true;
+	});
+	it('should return true when argument is undefined', () => {
+		const result = isNil(undefined);
+		expect(result).to.be.true;
 	});
 });
