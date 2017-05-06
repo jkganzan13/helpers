@@ -4,7 +4,7 @@
  * @param {object} obj
  * @return {*}
  **/
-function getProp(prop,obj) {
+function getProp(prop, obj) {
 	const path = (Array.isArray(prop)) ? prop : prop.split('.');
 	const val = obj[path.shift()];
 	return (path.length === 0 || val === undefined) ? val : getProp(path, val);
@@ -20,12 +20,21 @@ function isNil(value) {
 }
 
 /**
+ * Returns true if object is empty
+ * @param {object} obj
+ * @return {boolean}
+ **/
+function isObjectEmpty(obj) {
+	return typeof obj === 'object' && !!obj && Object.keys(obj).length === 0;
+}
+
+/**
  * Returns true if value is an empty string, object and array or NaN
  * @param {*} value
  * @return {boolean}
  **/
 function isEmpty(value) {
-	switch(typeof value) {
+	switch (typeof value) {
 		case 'string':
 			return !value.trim();
 		case 'number':
@@ -37,15 +46,6 @@ function isEmpty(value) {
 		default:
 			return !value;
 	}
-}
-
-/**
- * Returns true if object is empty
- * @param {object} obj
- * @return {boolean}
- **/
-function isObjectEmpty(obj) {
-	return typeof obj === 'object' && !!obj && Object.keys(obj).length === 0;
 }
 
 /**
