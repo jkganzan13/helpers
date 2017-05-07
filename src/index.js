@@ -1,4 +1,17 @@
 /**
+ * Iterates through each key in the passed object
+ * @param fn - function to call for each key
+ *           - receives 3 arguments: value, key and object
+ * @param obj -  object to iterate
+ */
+function forEachObjKey(fn, obj) {
+	const keys = Object.keys(obj);
+	keys.forEach((key) => {
+		fn(obj[key], key, obj);
+	});
+}
+
+/**
  * Returns the indicated property of the object
  * @param {string, string[]} prop
  * @param {object} obj
@@ -75,6 +88,7 @@ function sortByProp(prop, arr) {
 }
 
 export {
+	forEachObjKey,
 	getProp,
 	isEmpty,
 	isEmptyOrNil,

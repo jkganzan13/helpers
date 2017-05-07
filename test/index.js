@@ -1,4 +1,5 @@
 import {
+	forEachObjKey,
 	getProp,
 	isEmpty,
 	isEmptyOrNil,
@@ -6,6 +7,39 @@ import {
 	isObjectEmpty,
 	sortByProp,
 } from '../src';
+
+describe('forEachObjKey', () => {
+	const increment = value => value + 1;
+	it('should call the function passed', () => {
+		const fnSpy = spy(increment);
+		const obj = {
+			val1: 1,
+			val2: 2,
+		};
+		forEachObjKey(fnSpy, obj);
+		expect(fnSpy).to.be.spy;
+		expect(fnSpy).to.have.been.called();
+	});
+	it('should call the function passed with 3 params: value, key and object passed', () => {
+		const fnSpy = spy(increment);
+		const obj = {
+			val1: 1,
+			val2: 2,
+		};
+		forEachObjKey(fnSpy, obj);
+		expect(fnSpy).to.have.been.called.with(1, 'val1', obj);
+		expect(fnSpy).to.have.been.called.with(2, 'val2', obj);
+	});
+	it('should call the function n times the number of keys the passed object has', () => {
+		const fnSpy = spy(increment);
+		const obj = {
+			val1: 1,
+			val2: 2,
+		};
+		forEachObjKey(fnSpy, obj);
+		expect(fnSpy).to.have.been.called.exactly(2);
+	});
+});
 
 describe('getProp', () => {
 	it('should return the indicated property of an object', () => {
