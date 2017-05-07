@@ -4,6 +4,7 @@ import {
 	isEmptyOrNil,
 	isNil,
 	isObjectEmpty,
+	sortByProp,
 } from '../src';
 
 describe('getProp', () => {
@@ -139,5 +140,37 @@ describe('isObjectEmpty', () => {
 	it('should return false when argument is NOT an empty object', () => {
 		const result = isObjectEmpty({ a: 'hello' });
 		expect(result).to.be.false;
+	});
+});
+
+describe('sortByProp', () => {
+	const list = [
+		{ prop: 'b' },
+		{ prop: 'd' },
+		{ prop: 'e' },
+		{ prop: 'a' },
+		{ prop: 'c' },
+	];
+	it('should sort the list according to the prop specified', () => {
+		const expected = [
+			{ prop: 'a' },
+			{ prop: 'b' },
+			{ prop: 'c' },
+			{ prop: 'd' },
+			{ prop: 'e' },
+		];
+		const result = sortByProp('prop', list);
+		expect(result).to.eql(expected);
+	});
+	it('should sort the list in ascending order by default', () => {
+		const notExpected = [
+			{ prop: 'e' },
+			{ prop: 'd' },
+			{ prop: 'c' },
+			{ prop: 'b' },
+			{ prop: 'a' },
+		];
+		const result = sortByProp('prop', list);
+		expect(result).to.not.eql(notExpected);
 	});
 });

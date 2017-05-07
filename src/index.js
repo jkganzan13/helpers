@@ -57,10 +57,28 @@ function isEmptyOrNil(value) {
 	return isNil(value) || isEmpty(value);
 }
 
+/**
+ * Returns an array sorted by its prop in ascending order
+ * @param prop - value to compare
+ * @param arr - list of elements to sort
+ */
+function sortByProp(prop, arr) {
+	return arr.sort((a, b) => {
+		if (a[prop] < b[prop]) {
+			return -1;
+		}
+		if (a[prop] > b[prop]) {
+			return 1;
+		}
+		return 0;
+	});
+}
+
 export {
 	getProp,
 	isEmpty,
 	isEmptyOrNil,
 	isNil,
 	isObjectEmpty,
+	sortByProp,
 };
